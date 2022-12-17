@@ -2,45 +2,70 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css">
-    <link rel="stylesheet" href="./assets/css/reset.css">
-    <link rel="stylesheet" href="./assets/css/style.css" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css">
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <link rel="stylesheet" href="./assets/css/style.css" />
 
-    <title>5-day Forecast</title>
+  <title>5-day Forecast</title>
 </head>
 
 <body>
 
-    <section class="hero is-medium is-info">
-        <div class="hero-body">
-          <p class="title">
-            Weather Forecast For Your Location, or Destination!
+  <section class="hero is-medium is-info">
+    <div class="hero-body">
+      <p class="title">
+        Weather Forecast For Your Location, or Destination!
+      </p>
+      <p class="subtitle">
+
+      </p>
+    </div>
+  </section>
+
+  <main class="columns">
+    <nav class="panel column is-one-quarter">
+      <form class="panel-block">
+        <p class="control has-icons-left">
+          <input class="input" type="text" id="location" placeholder="Search...">
+          <span class="icon is-left">
+            <i class="fas fa-search" aria-hidden="true"></i>
+          </span>
+        </p>
+        <button class="button is-info" id="search-btn">Go</button>
+      </form>
+      <!-- <p class="panel-heading">
+          Search History
+        </p>
+        <div class="panel-block">
+          <p class="control has-icons-left">
+            <input class="input" type="text" id="location" name="locationInput" placeholder="Search for a City">
+            <span class="icon is-left">
+              <i class="fas fa-search" aria-hidden="true"></i>
+            </span>
           </p>
-          <p class="subtitle">
-            
-          </p>
-        </div>
-      </section>
+          <button class="button is-info" id="search-btn" style="margin-left: 10px;">Search</button>
+        </div> -->
+    </nav>
+  </main>
 
-    <main>
-        <input type="text" id="location" name="locationInput">
-    </main>
 
-    
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.js"
-        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
-    <script>dayjs().format()</script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrkXbyJBxJpFsjmQ3vGPx06k2eiXBbP8g"></script> -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrkXbyJBxJpFsjmQ3vGPx06k2eiXBbP8g&libraries=places"></script>
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+  <script>dayjs().format()</script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrkXbyJBxJpFsjmQ3vGPx06k2eiXBbP8g"></script> -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrkXbyJBxJpFsjmQ3vGPx06k2eiXBbP8g&libraries=places"></script>
 
-    <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
