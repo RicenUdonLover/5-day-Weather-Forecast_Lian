@@ -9,23 +9,23 @@ const subTitleEl = $('.subtitle')
 const searchBtnEl = $('#search-btn')
 
 //Functions--------------------------------------------------------
-showDate = dateContainer => dateContainer.text(`Today is ${presentDate}`)
-addAutoComplete = (input, options) => new google.maps.places.Autocomplete(input, options)
+showDate = dateContainer => dateContainer.text(`Today is ${presentDate}`) //Show today's date in subtitle of the hero element
+
+addAutoComplete = (input, options) => new google.maps.places.Autocomplete(input, options) // Add autocomplete to the search input
+
 getText = (event) => {
   event.preventDefault();
   var inputLocationText = inputLocationEL.value.trim()
   console.log(inputLocationText)
   getGeocode(inputLocationText, getWeatherApi)
-}
+} // Get the text from search bar and use it to get geocode from google maps platform
 
 
 getGeocode = (address, callback) => {
-  if (address) {
+  if (address) { // Make sure the address is not empty
     console.log(address)
-    // Next, make a request to the geocode method, passing in the city name
-    // and a callback function to handle the response
+    // Next, make a request to the geocode method, passing in the city name and a callback function to handle the response
     geocoder.geocode({ address: address }, (results, status) => {
-      // If the request was successful
       if (status === google.maps.GeocoderStatus.OK) {
         // Get the first result (which should be the most accurate)
         const result = results[0];
@@ -34,32 +34,26 @@ getGeocode = (address, callback) => {
         const lng = result.geometry.location.lng();
         // Print the latitude and longitude to the console
         console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-        callback(lat, lng)
+        callback(lat, lng)// Use a callback function to handle the coordinates got from the search
       } else {
-        // If the request was not successful, print the error to the console
         console.error(`Geocoding error: ${status}`);
       }
     });
+  } else {
+    console.log('invalid input')
+    return
   }
 }
 
-var getWeatherApi = function (Latitude, Longitude) {
-  var url = `https://api.openweathermap.org/data/2.5/forecast?lat=${Latitude}&lon=${Longitude}&appid=c3ad3a0e2e79c49b9881a9353b89aa61`
-  console.log(url)
-  fetch(url)
-    .then(function (response) {
-      if (response.ok) {
-        // console.log(response);
-        response.json().then(function (data) {
-          console.log(data)
-        });
-      } else {
-        alert('Error: ' + response.statusText);
-      }
-    })
-    .catch(function (error) {
-      console.log('something is wrong');
-    });
+var getWeatherApi = (Latitude, Longitude) => {
+  var weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${Latitude}&lon=${Longitude}&units=imperial&cnt=5&appid=c3ad3a0e2e79c49b9881a9353b89aa61`//Using url parameters to show data in imperial unit and 
+  console.log(weatherUrl)
+  $.ajax({
+    type: 'GET',
+    url: weatherUrl,
+    success: (data)=> console.log(data),
+    error: ()=> alert('Something went wrong'),
+  });
 };
 
 //Excute functions
