@@ -11,11 +11,11 @@ const searchBtnEl = $('#search-btn')
 //Functions--------------------------------------------------------
 showDate = dateContainer => dateContainer.text(`Today is ${presentDate}`)
 addAutoComplete = (input, options) => new google.maps.places.Autocomplete(input, options)
-getText = (event)  => {
+getText = (event) => {
   event.preventDefault();
   var inputLocationText = inputLocationEL.value.trim()
   console.log(inputLocationText)
-  getGeocode(inputLocationText)
+  getGeocode(inputLocationText, getWeatherApi)
 }
 
 
@@ -34,6 +34,7 @@ getGeocode = (address, callback) => {
         const lng = result.geometry.location.lng();
         // Print the latitude and longitude to the console
         console.log(`Latitude: ${lat}, Longitude: ${lng}`);
+        callback(lat, lng)
       } else {
         // If the request was not successful, print the error to the console
         console.error(`Geocoding error: ${status}`);
@@ -42,7 +43,24 @@ getGeocode = (address, callback) => {
   }
 }
 
-get
+var getWeatherApi = function (Latitude, Longitude) {
+  var url = `https://api.openweathermap.org/data/2.5/forecast?lat=${Latitude}&lon=${Longitude}&appid=c3ad3a0e2e79c49b9881a9353b89aa61`
+  console.log(url)
+  fetch(url)
+    .then(function (response) {
+      if (response.ok) {
+        // console.log(response);
+        response.json().then(function (data) {
+          console.log(data)
+        });
+      } else {
+        alert('Error: ' + response.statusText);
+      }
+    })
+    .catch(function (error) {
+      console.log('something is wrong');
+    });
+};
 
 //Excute functions
 showDate(subTitleEl)
