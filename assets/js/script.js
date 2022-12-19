@@ -24,7 +24,7 @@ getText = (event) => {
 getGeocode = (address, callback) => {
   if (address) { // Make sure the address is not empty
     console.log(address)
-    // Next, make a request to the geocode method, passing in the city name and a callback function to handle the response
+    // Make a request to the geocode method, passing in the city name and a callback function to handle the response
     geocoder.geocode({ address: address }, (results, status) => {
       if (status === google.maps.GeocoderStatus.OK) {
         // Get the first result (which should be the most accurate)
@@ -45,18 +45,35 @@ getGeocode = (address, callback) => {
   }
 }
 
-var getWeatherApi = (Latitude, Longitude) => {
-  var weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${Latitude}&lon=${Longitude}&units=imperial&cnt=5&appid=c3ad3a0e2e79c49b9881a9353b89aa61`//Using url parameters to show data in imperial unit and 
+getWeatherApi = (Latitude, Longitude) => {
+  var weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${Latitude}&lon=${Longitude}&units=imperial&cnt=40&appid=c3ad3a0e2e79c49b9881a9353b89aa61`//Using url parameters to show data in imperial unit and show max length of data (5 days)
   console.log(weatherUrl)
   $.ajax({
     type: 'GET',
     url: weatherUrl,
-    success: (data)=> console.log(data),
-    error: ()=> alert('Something went wrong'),
+    success: (data) => {
+      console.log(data)
+      for (let i =0; i < 5; i++){
+      var day = new City(data, i)
+      console.log(day)
+      }
+    },
+    error: () => alert('Something went wrong'),
   });
 };
 
-//Excute functions
+class City {
+  constructor(data, day) {
+    this.name = `${data.city.name}, ${data.city.country}`,
+      this.date = data.list[day * 8].dt_txt.slice(0, 10),
+      this.temp = `${Math.floor(data.list[day * 8].main.temp)}°F`,
+      this.feelsLike = `${Math.floor(data.list[day * 8].main.feels_like)}°F`,
+      this.humidity = `${data.list[day * 8].main.humidity}%`,
+      this.weather = data.list[day * 8].weather[0].main,
+      this.wind = `${data.list[day * 8].wind.speed}mph`
+  }
+}
+//Excute functions-------------------------------------------------------------------------
 showDate(subTitleEl)
 addAutoComplete(inputLocationEL, options)
 searchBtnEl.click(getText)
