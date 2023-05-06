@@ -46,20 +46,51 @@ getGeocode = (address, callback) => {
 }
 
 getWeatherApi = (Latitude, Longitude) => {
-  var weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${Latitude}&lon=${Longitude}&units=imperial&cnt=40&appid=c3ad3a0e2e79c49b9881a9353b89aa61`//Using url parameters to show data in imperial unit and show max length of data (5 days)
-  console.log(weatherUrl)
-  $.ajax({
-    type: 'GET',
-    url: weatherUrl,
-    success: (data) => {
-      console.log(data)
-      for (let i =0; i < 5; i++){
-      var day = new City(data, i)
-      console.log(day)
+  var weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${Latitude}&lon=${Longitude}&units=imperial&cnt=40&appid=c3ad3a0e2e79c49b9881a9353b89aa61`; // Using url parameters to show data in imperial unit and show max length of data (5 days)
+  console.log(weatherUrl);
+
+  fetch(weatherUrl)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
-    },
-    error: () => alert('Something went wrong'),
-  });
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+      const container = document.getElementById('cards-container');
+      container.innerHTML = ''; // Clear previous cards
+
+      for (let i = 0; i < 5; i++) {
+        var day = new City(data, i);
+        console.log(day);
+
+        // Create card element and populate it with City properties
+        const card = document.createElement('div');
+        card.className = 'column is-one-fifth';
+        card.innerHTML = `
+  <div class="card">
+    <div class="card-content">
+      <div class="content">
+        <h3 class="title is-4">${day.name}</h3>
+        <p>Date: ${day.date}</p>
+        <p>Temperature: ${day.temp}</p>
+        <p>Feels Like: ${day.feelsLike}</p>
+        <p>Humidity: ${day.humidity}</p>
+        <p>Weather: ${day.weather}</p>
+        <p>Wind: ${day.wind}</p>
+      </div>
+    </div>
+  </div>
+`;
+
+        container.appendChild(card);
+      }
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+      alert('Something went wrong');
+    });
 };
 
 class City {
