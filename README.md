@@ -25,7 +25,7 @@ This Weather Forecast App provides a 5-day weather forecast for any location, ba
 
 3. Open `index.html` in your preferred web browser.
 
-Or you can use the deployed version [here]()
+Or you can use the deployed version [here](https://ricenudonlover.github.io/5-day-Weather-Forecast_Lian/)
 
 ## Dependencies
 
