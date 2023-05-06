@@ -2,7 +2,7 @@
 
 This Weather Forecast App provides a 5-day weather forecast for any location, based on user input. The app utilizes the Google Places API for location search and the OpenWeatherMap API for retrieving the weather data. Users can see their search history, which is stored in the browser's local storage.
 
-![Weather Forecast App Screenshot](./assets/images/screenshot.jpg)
+![Weather Forecast App Screenshot](./assets/images/screenshot.JPG)
 
 ## Features
 
